@@ -1,0 +1,2 @@
+datastream-py @ git+https://github.com/datastreamapp/datastream-py@main
+python-dotenv
