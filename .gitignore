@@ -207,7 +207,4 @@ marimo/_lsp/
 __marimo__/
 
 # test files
-test_results.txt
-test_results2.txt
-test_results3.txt
-test_results4.txt
+test_results*
