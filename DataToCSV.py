@@ -8,9 +8,10 @@ set_api_key(os.getenv('API_KEY'))
 
 # Constants
 FIELDNAMES = [
-    'MonitoringLocationName', 'MonitoringLocationID', 'ActivityType',
-    'ActivityMediaName', 'ActivityStartDate', 'CharacteristicName',
-    'ResultSampleFraction', 'ResultValue', 'ResultUnit', 'ResultValueType'
+    'MonitoringLocationName', 'MonitoringLocationID',
+    'MonitoringLocationLatitude', 'MonitoringLocationLongitude',
+    'ActivityStartDate', 'CharacteristicName',
+    'ResultValue', 'ResultUnit'
 ]
 
 GREAT_LAKES = {
@@ -51,16 +52,21 @@ def format_list(items):
 if __name__ == "__main__":
     # Run queries
     fetch_and_save(
-        ['pH', 'Chloride', 'Escherichia coli', 'Dissolved oxygen (DO)', 'Chlorophyll a'],
-        'milligram.csv'
+        ['pH', 'Chloride', 'Dissolved oxygen (DO)', 'Chlorophyll a', 'Total suspended solids', 'Biochemical oxygen demand, standard conditions'],
+        'data/milligram.csv'
     )
 
     fetch_and_save(
         ['Temperature, water'],
-        'celsius.csv'
+        'data/celsius.csv'
     )
 
     fetch_and_save(
         ['Turbidity'],
-        'ntu.csv'
+        'data/ntu.csv'
     )
+    # No data is fetched for this
+    # fetch_and_save(
+    #     ['Conductivity'],
+    #     'data/microsiemens.csv'
+    # )
