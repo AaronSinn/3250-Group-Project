@@ -1,2 +1,3 @@
 datastream-py @ git+https://github.com/datastreamapp/datastream-py@main
 python-dotenv
+pandas==2.1.1
