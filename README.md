@@ -13,3 +13,12 @@ Add your `API Key` to your `.env` file
 
 Then run `pip install -r requirements.txt`
 
+## Run
+```bash
+python DataToCSV.py
+```
+
+```bash
+python CombineData.py
+```
+
