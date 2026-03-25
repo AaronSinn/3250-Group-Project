@@ -13,7 +13,7 @@ df['ActivityStartDate'] = pd.to_datetime(df['ActivityStartDate'])
 
 # Pivot
 df_pivot = df.pivot_table(
-    index=['MonitoringLocationID', 'MonitoringLocationLatitude',
+    index=['MonitoringLocationID', 'MonitoringLocationName', 'MonitoringLocationLatitude',
            'MonitoringLocationLongitude', 'ActivityStartDate'],
     columns='CharacteristicName',
     values='ResultValue'
