@@ -56,7 +56,6 @@ OUTPUT_COLUMNS = [
 # Step resolution is controlled by GRID_STEP in run().
 LAKE_BOUNDS = {
     "Lake Superior":  {"lat": (46.5, 49.0), "lon": (-92.0, -84.5)},
-    "Lake Michigan":  {"lat": (41.5, 46.0), "lon": (-88.0, -84.5)},
     "Lake Huron":     {"lat": (43.0, 46.5), "lon": (-84.5, -79.0)},
     "Georgian Bay":   {"lat": (44.5, 46.0), "lon": (-81.5, -79.0)},
     "Lake Erie":      {"lat": (41.5, 43.0), "lon": (-83.5, -78.5)},
