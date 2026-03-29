@@ -1,13 +1,20 @@
 # Great Lakes Water Quality Index
 
-> COMP-3250 · Group 4 · University of Windsor
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/gordonfn/api/main/docs/images/datastream.svg?sanitize=true" alt="DataStream Logo" width="400">
+  <br/>
+  COMP-3250 · Group 4 · University of Windsor
+  <br/>
+  <br/>
+</h1>
+
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-2.1-150458?logo=pandas&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-KNN-F7931E?logo=scikit-learn&logoColor=white)
 ![Tableau](https://img.shields.io/badge/Tableau-Public-E97627?logo=tableau&logoColor=white)
 
-End-to-end water quality analysis pipeline for the 5 Great Lakes. Pulls monitoring data from the [DataStream API](https://datastream.org/en-ca/documentation/api), calculates Water Quality Index (WQI) scores using the Purdue University formula, and uses KNN regression to predict water quality at unmonitored coordinates — all visualized in an interactive Tableau dashboard.
+End-to-end water quality analysis pipeline for the 5 Great Lakes. Pulls monitoring data from the [DataStream API](https://datastream.org/en-ca/documentation/api), calculates Water Quality Index (WQI) scores using the Purdue University formula, and uses KNN regression to predict water quality at unmonitored coordinates, all visualized in an interactive Tableau dashboard.
 
 ---
 
