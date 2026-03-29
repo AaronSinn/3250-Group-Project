@@ -3,6 +3,8 @@
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/gordonfn/api/main/docs/images/datastream.svg?sanitize=true" alt="DataStream Logo" width="400">
   <br/>
+  <br>
+  <br>
 </h1>
 
 > COMP-3250 · Group 4 · University of Windsor
