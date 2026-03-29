@@ -3,11 +3,10 @@
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/gordonfn/api/main/docs/images/datastream.svg?sanitize=true" alt="DataStream Logo" width="400">
   <br/>
-  COMP-3250 · Group 4 · University of Windsor
-  <br/>
-  <br/>
 </h1>
 
+> COMP-3250 · Group 4 · University of Windsor
+  
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-2.1-150458?logo=pandas&logoColor=white)
