@@ -169,6 +169,49 @@ def apply_wqi(df: pd.DataFrame) -> pd.DataFrame:
     df["Rating"] = [r["Rating"] for r in wqi_results]
     return df
 
+def remove_land_data(df: pd.DataFrame, locations_csv: str = "data/LocationsInLakes.csv") -> pd.DataFrame:
+    """
+    Remove rows whose (lat, lon) coordinate pair does not appear in
+    LocationsInLakes.csv — i.e. grid points that landed on land rather
+    than inside a lake body.
+ 
+    Parameters
+    ----------
+    df            : DataFrame with MonitoringLocationLatitude and
+                    MonitoringLocationLongitude columns.
+    locations_csv : Path to LocationsInLakes.csv.  The file is expected to
+                    have columns 'Monitoring Location Latitude' and
+                    'Monitoring Location Longitude'.
+ 
+    Returns
+    -------
+    Filtered DataFrame containing only in-lake coordinate pairs.
+    """
+    lake_coords = pd.read_csv(locations_csv, encoding="utf-8-sig")
+ 
+    # Build a set of (lat, lon) tuples for O(1) membership testing.
+    # Values are rounded to 3 decimal places to guard against minor
+    # floating-point discrepancies between the two sources.
+    valid_pairs = set(
+        zip(
+            lake_coords["Monitoring Location Latitude"].round(3),
+            lake_coords["Monitoring Location Longitude"].round(3),
+        )
+    )
+ 
+    mask = df.apply(
+        lambda row: (
+            round(float(row["MonitoringLocationLatitude"]), 3),
+            round(float(row["MonitoringLocationLongitude"]), 3),
+        )
+        in valid_pairs,
+        axis=1,
+    )
+ 
+    filtered = df[mask].reset_index(drop=True)
+    removed = len(df) - len(filtered)
+    print(f"  remove_land_data: kept {len(filtered)} rows, removed {removed} land points")
+    return filtered
 
 # ---------------------------------------------------------------------------
 # Main entry point
@@ -178,11 +221,12 @@ def run(
     input_csv: str = "data/combined_data.csv",
     predictions_csv: str = "data/knn_predictions.csv",
     tableau_csv: str = "data/tableau_ready.csv",
+    locations_csv: str = "data/LocationsInLakes.csv",
     grid_step: float = 0.3,
 ) -> pd.DataFrame:
     """
     Full KNN pipeline: load → train → predict → save.
-
+ 
     Outputs
     -------
     data/knn_predictions.csv  — predicted points only
@@ -192,38 +236,40 @@ def run(
     print(f"Loading observed data from {input_csv}...")
     df_observed = pd.read_csv(input_csv)
     print(f"  {len(df_observed)} observed rows, {df_observed['MonitoringLocationName'].nunique()} locations")
-
+ 
     print(f"\nGenerating prediction grid (step={grid_step}°)...")
     df_grid = generate_grid(step=grid_step)
     print(f"  {len(df_grid)} grid points across {len(LAKE_BOUNDS)} lake regions")
-
+ 
+    print("\nRemoving land-based grid points...")
+    df_grid = remove_land_data(df_grid, locations_csv)
+ 
     print("\nTraining KNN models and predicting characteristics...")
     df_predicted = train_and_predict(df_observed, df_grid)
-
+ 
     print("\nCalculating WQI for predicted points...")
     df_predicted = apply_wqi(df_predicted)
-
+ 
     # Add metadata to match combined_data.csv schema
     df_predicted["MonitoringLocationID"] = "predicted"
     df_predicted["ActivityStartDate"] = PREDICTION_DATE
     df_predicted["DataType"] = "Predicted"
-
+ 
     df_predicted = df_predicted[OUTPUT_COLUMNS]
     df_predicted.to_csv(predictions_csv, index=False)
     print(f"\nSaved {len(df_predicted)} predicted points → {predictions_csv}")
-
+ 
     # Build merged file for Tableau: tag observed rows then concatenate
     df_obs_tagged = df_observed.copy()
     df_obs_tagged["DataType"] = "Observed"
     df_obs_tagged = df_obs_tagged[OUTPUT_COLUMNS]
-
+ 
     df_tableau = pd.concat([df_obs_tagged, df_predicted], ignore_index=True)
     df_tableau.to_csv(tableau_csv, index=False)
     print(f"Saved {len(df_tableau)} total rows (observed + predicted) → {tableau_csv}")
     print("\nDone. Connect Tableau to data/tableau_ready.csv for the full map view.")
-
+ 
     return df_predicted
-
 
 if __name__ == "__main__":
     run()
