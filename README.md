@@ -129,7 +129,7 @@ Connect Tableau Desktop to `data/tableau_ready.csv`:
 - **DataType filter** — toggle between `Observed` and `Predicted` layers
 - **Parameter filters** — drill down by `MonitoringLocationName`, `ActivityStartDate`, or any characteristic column
 
-Publish to [Tableau Public](https://public.tableau.com) for a shareable link.
+Publish to [Tableau Public](https://public.tableau.com/views/Great_Lakes_WQI/WQIDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) for a shareable link.
 
 ---
 
