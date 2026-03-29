@@ -211,3 +211,4 @@ test_results*
 
 # Claude Code context files
 .claude/
+Claude.md
