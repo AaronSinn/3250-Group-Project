@@ -108,7 +108,6 @@ After step 5, open **`data/tableau_ready.csv`** in Tableau to build the dashboar
 │   ├── combined_data.csv
 │   ├── knn_predictions.csv
 │   └── tableau_ready.csv
-├── context/              # Project PDFs (proposal, rubrics, Gantt)
 ├── requirements.txt
 └── .env.example
 ```

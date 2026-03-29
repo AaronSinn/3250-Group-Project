@@ -18,9 +18,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import StandardScaler
 from WQI import calculate_wqi
 
-# ---------------------------------------------------------------------------
 # Constants
-# ---------------------------------------------------------------------------
 
 # Number of nearest neighbours to use for regression
 K = 5
@@ -70,10 +68,7 @@ PREDICTION_MONTH = 7
 PREDICTION_DATE = "2024-07-01"
 
 
-# ---------------------------------------------------------------------------
 # Grid generation
-# ---------------------------------------------------------------------------
-
 def generate_grid(step: float = 0.3) -> pd.DataFrame:
     """
     Build a lat/lon grid across all lake bounding boxes.
@@ -103,10 +98,7 @@ def generate_grid(step: float = 0.3) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-# ---------------------------------------------------------------------------
 # Model training and prediction
-# ---------------------------------------------------------------------------
-
 def train_and_predict(df_observed: pd.DataFrame, df_grid: pd.DataFrame) -> pd.DataFrame:
     """
     Train one KNeighborsRegressor per characteristic and predict values at
